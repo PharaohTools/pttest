@@ -1,17 +1,24 @@
 Testingkamen Modules to be created
 ---------------------------------------
 
-Behat Init
- Then Behat mkdirs
- Default Files install
+Behat Init               DONE
+ Then Behat mkdirs       DONE
+ Default Files install   DONE
 
-Cucumber init -
- with default files -
- gemfile bundle -
+Cucumber init -          DONE
+ with default files -    DONE
+ gemfile bundle -        DONE
 
-Php Unit init -
+Php Unit init -          DONE
  mkdirs -
  templated files in -
+
+Simpletest
+Saucelabs
+Eggplant
+Skipfish Suite
+Loadrunner Suite
+JMeter Suite
 
 
 
@@ -21,8 +28,10 @@ From Cleo...
 
 System Detection - Allow the pyramid application to detect OS, OS Version and Hardware information. Have a Factory Class
 in Core which detects the running OS and looks in the module for a model which Reports itself as matching The
-combination (ie "Ubuntu", "12.04"/"+ 11.10"), falling back to "any" instead of version if there's an "any" model. - DONE FULY
+combination (ie "Ubuntu", "12.04"/"+ 11.10"), falling back to "any" instead of version if there's an "any" model.
+- DONE FULLY
 - Add other data like hostname, ip addresses to this
+- DONE FULLY
 
 State Detection - Allow the pyramid application to detect information regarding software and configuration install
 current state
