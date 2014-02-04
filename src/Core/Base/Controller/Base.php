@@ -117,11 +117,7 @@ class Base {
         $myModuleAndDependencies = array_merge(array($module), $myInfo->dependencies() ) ;
         $dependencyCheck = $this->checkForRegisteredModels($pageVars["route"]["extraParams"], $myModuleAndDependencies) ;
         if ($dependencyCheck === true) {
-            if (method_exists($myInfo, "modelGroups")) {
-                $modelGroups = $myInfo->modelGroups();
-                $action = $modelGroups[$pageVars["route"]["action"]] ; }
-            $modelType = (isset($action)) ? $action : "any" ;
-            $thisModel = \Model\SystemDetectionFactory::getCompatibleModel($module, $modelType, $pageVars["route"]["extraParams"]);
+            $thisModel = \Model\SystemDetectionFactory::getCompatibleModel($module, $moduleType, $pageVars["route"]["extraParams"]);
             return $thisModel; }
         return $dependencyCheck ;
     }
