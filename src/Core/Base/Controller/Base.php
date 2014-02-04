@@ -19,12 +19,20 @@ class Base {
     $this->content["route"] = $pageVars["route"];
     $this->content["messages"] = $pageVars["messages"];
     $action = $pageVars["route"]["action"];
+
     if ($action=="help" && !in_array($action, $ignored_actions)) {
-      $helpModel = new \Model\Help();
-      $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
-      return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
+        $helpModel = new \Model\Help();
+        $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
+        return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
     if (isset($thisModel)) {
+        // @todo child controllers should specify this
+        if ($action=="install" || $action=="uninstall" || $action=="status" && !in_array($action, $ignored_actions)) {
+            $this->content["params"] = $thisModel->params;
+            $this->content["appName"] = $thisModel->autopilotDefiner;
+            $newAction = ucfirst($action) ;
+            $this->content["appInstallResult"] = $thisModel->{"ask".$newAction}();
+            return array ("type"=>"view", "view"=>"app".$newAction, "pageVars"=>$this->content); }
         if (in_array($action, array("init", "initialize")) && !in_array($action, $ignored_actions)) {
             $this->content["params"] = $thisModel->params;
             $this->content["appName"] = $thisModel->autopilotDefiner;
@@ -71,11 +79,40 @@ class Base {
             $errors[] = "Module $modelClassNameOrArray Does not have compatible models for this system: \n"; } } }
     if ( count($errors) > 0 ) {
       return $errors; }
-    echo "All required Modules found, all with compatible Models"."\n";
+    // echo "All required Modules found, all with compatible Models"."\n";
     return true ;
   }
 
-    protected function getModelAndCheckDependencies($module, $pageVars, $moduleType="Installer") {
+  protected function executeMyRegisteredModels($params = null) {
+    foreach ($this->registeredModels as $modelClassNameOrArray) {
+      if ( is_array($modelClassNameOrArray) ) {
+        $currentKeys = array_keys($modelClassNameOrArray) ;
+        $currentKey = $currentKeys[0] ;
+        $fullClassName = '\Model\\'.$currentKey;}
+      else {
+        $fullClassName = '\Model\\'.$modelClassNameOrArray; }
+      $currentModelFactory = new $fullClassName();
+      $currentModel = new $currentModelFactory->getModel($params);
+      $miniRay = array();
+      $miniRay["appName"] = $currentModel->programNameInstaller;
+      $miniRay["installResult"] = $currentModel->askInstall();
+      $this->content["results"][] = $miniRay ; }
+  }
+
+  protected function executeMyRegisteredModelsAutopilot($autoPilot, $params = null) {
+    foreach ($autoPilot->steps as $modelArray) {
+        $currentKeys = array_keys($modelArray) ;
+        $currentKey = $currentKeys[0] ;
+        $fullClassName = '\Model\\'.$currentKey;
+        $modelFactory = new $fullClassName($params);
+        $currentModel = $modelFactory->getModel($params);
+        $miniRay = array();
+        $miniRay["appName"] = $currentModel->programNameInstaller;
+        $miniRay["installResult"] = $currentModel->runAutoPilotInstall($modelArray);
+        $this->content["results"][] = $miniRay ; }
+  }
+
+  protected function getModelAndCheckDependencies($module, $pageVars, $moduleType="Installer") {
         $myInfo = \Core\AutoLoader::getSingleInfoObject($module);
         $myModuleAndDependencies = array_merge(array($module), $myInfo->dependencies() ) ;
         $dependencyCheck = $this->checkForRegisteredModels($pageVars["route"]["extraParams"], $myModuleAndDependencies) ;
