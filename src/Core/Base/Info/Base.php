@@ -12,7 +12,7 @@ class Base {
     }
 
     public function routesAvailable() {
-      return array("help", "status", "install", "uninstall", "initialize", "init", "execute");
+      return array("help", "status", "install", "uninstall", "initialize", "init", "execute", "exec");
       // @todo some app settings class should contain this instead
     }
 
