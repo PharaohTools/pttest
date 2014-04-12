@@ -24,16 +24,6 @@ class BehatInfo extends Base {
         return array("init"=>"Initializer","initialize"=>"Initializer");
     }
 
-    public function autoPilotVariables() {
-      return array(
-        "Behat" => array(
-          "Behat" => array(
-            "programNameMachine" => "behat", // command and app dir name
-          )
-        )
-      );
-    }
-
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This command allows you to initialize a Behat test suite.

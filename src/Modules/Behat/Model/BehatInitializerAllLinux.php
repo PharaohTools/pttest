@@ -12,7 +12,7 @@ class BehatInitializerAllLinux extends BaseTestInit {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("Initializer") ;
+    public $modelGroup = array("Default", "Initializer") ;
     private $paramsForBootstrappingModels ;
 
     public function __construct($params) {
