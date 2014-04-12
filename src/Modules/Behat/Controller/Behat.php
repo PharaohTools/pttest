@@ -6,6 +6,11 @@ class Behat extends Base {
 
     protected function defaultExecution($pageVars) {
 
+        if ($pageVars["route"]["action"] == "help") {
+            $helpModel = new \Model\Help();
+            $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
+            return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
+
         if ($pageVars["route"]["action"] == "init" || $pageVars["route"]["action"] == "initialize") {
             $modGroup = "Initializer" ; }
 
