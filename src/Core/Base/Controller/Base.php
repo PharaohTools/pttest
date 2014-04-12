@@ -8,11 +8,20 @@ class Base {
   protected $registeredModels = array();
 
   public function __construct() {
-    $this->content = array(); }
+      $this->content = array(); }
 
   public function execute($pageVars) {
-    $defaultExecution = $this->defaultExecution($pageVars) ;
-    if (is_array($defaultExecution)) { return $defaultExecution ; }
+      $defaultExecution = $this->defaultExecution($pageVars) ;
+      if (is_array($defaultExecution)) { return $defaultExecution ; }
+  }
+
+  protected function defaultExecution($pageVars) {
+      $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
+      // if we don't have an object, its an array of errors
+      if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
+      $isDefaultAction = self::checkDefaultActions($pageVars, array(), $thisModel) ;
+      if ( is_array($isDefaultAction) ) { return $isDefaultAction; }
+      return null ;
   }
 
   public function checkDefaultActions($pageVars, $ignored_actions=array(), $thisModel=null) {
@@ -44,9 +53,9 @@ class Base {
             $this->content["appInstallResult"] = $thisModel->askExec();
             return array ("type"=>"view", "view"=>"appInstall", "pageVars"=>$this->content); } }
 
-     else if (!isset($thisModel)) {
-         $this->content["messages"][] = "Required Model Missing. Cannot Continue.";
-         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content); }
+    else if (!isset($thisModel)) {
+        $this->content["messages"][] = "Required Model Missing. Cannot Continue.";
+        return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content); }
 
     return false;
   }
@@ -126,15 +135,6 @@ class Base {
         $this->content = array_merge($pageVars, $content) ;
         foreach($errors as $error) { $this->content["messages"][] = $error ; }
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
-    }
-
-    protected function defaultExecution($pageVars) {
-        $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
-        // if we don't have an object, its an array of errors
-        if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
-        $isDefaultAction = self::checkDefaultActions($pageVars, array(), $thisModel) ;
-        if ( is_array($isDefaultAction) ) { return $isDefaultAction; }
-        return null ;
     }
 
 }
