@@ -18,13 +18,13 @@ Capybara.configure do |config|
   host = Proc.new do |env|
     case env.to_sym
       when :development
-ENV["APPLICATION_HOST"] || "<%tpl.php%>app_url</%tpl.php%>"
+        ENV["APPLICATION_HOST"] || "<%tpl.php%>app_url</%tpl.php%>"
       when :test
 
       when :production
 
       else
-
+        ENV["APPLICATION_HOST"] || "<%tpl.php%>app_url</%tpl.php%>"
     end
 
   end
