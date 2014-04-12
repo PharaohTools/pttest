@@ -93,14 +93,17 @@ COMPLETION;
     }
 
     protected function setCmdLineParams($params) {
-      $cmdParams = array();
-      foreach ($params as $param) {
-        if ( substr($param, 0, 2)=="--" && strpos($param, '=') != null ) {
-          $equalsPos = strpos($param, "=") ;
-          $paramKey = substr($param, 2, $equalsPos-2) ;
-          $paramValue = substr($param, $equalsPos+1, strlen($param)) ;
-          $cmdParams = array_merge($cmdParams, array($paramKey => $paramValue)); } }
-      $this->params = $cmdParams;
+        $cmdParams = array();
+        foreach ($params as $paramKey => $paramValue) {
+            if (substr($paramValue, 0, 2)=="--" && strpos($paramValue, '=') != null ) {
+                $equalsPos = strpos($paramValue, "=") ;
+                $paramKey = substr($paramValue, 2, $equalsPos-2) ;
+                $paramValue = substr($paramValue, $equalsPos+1, strlen($paramValue)) ; }
+            else if (substr($paramValue, 0, 2)=="--" && strpos($paramValue, '=') == false ) {
+                $paramKey = substr($paramValue, 2) ;
+                $paramValue = true ; }
+            $cmdParams = array_merge($cmdParams, array($paramKey => $paramValue)); }
+        $this->params = (is_array($this->params)) ? array_merge($this->params, $cmdParams) : $cmdParams;
     }
 
     protected function askYesOrNo($question) {
@@ -222,36 +225,36 @@ COMPLETION;
                     $this->installUserHomeDir, $comm); } }
     }
 
-    protected function executePreInstallFunctions($autoPilot){
+    protected function executePreInstallFunctions(){
         if (isset($this->registeredPreInstallFunctions) &&
             is_array($this->registeredPreInstallFunctions) &&
             count($this->registeredPreInstallFunctions) >0) {
             foreach ($this->registeredPreInstallFunctions as $func) {
-                $this->$func($autoPilot); } }
+                $this->$func(); } }
     }
 
-    protected function executePostInstallFunctions($autoPilot){
+    protected function executePostInstallFunctions(){
         if (isset($this->registeredPostInstallFunctions) &&
             is_array($this->registeredPostInstallFunctions) &&
             count($this->registeredPostInstallFunctions) >0) {
             foreach ($this->registeredPostInstallFunctions as $func) {
-                $this->$func($autoPilot); } }
+                $this->$func(); } }
     }
 
-    protected function executePreUnInstallFunctions($autoPilot){
+    protected function executePreUnInstallFunctions(){
         if (isset($this->registeredPreUnInstallFunctions) &&
             is_array($this->registeredPreUnInstallFunctions) &&
             count($this->registeredPreUnInstallFunctions) >0) {
             foreach ($this->registeredPreUnInstallFunctions as $func) {
-                $this->$func($autoPilot); } }
+                $this->$func(); } }
     }
 
-    protected function executePostUnInstallFunctions($autoPilot){
+    protected function executePostUnInstallFunctions(){
         if (isset($this->registeredPostUnInstallFunctions) &&
             is_array($this->registeredPostUnInstallFunctions) &&
             count($this->registeredPostUnInstallFunctions) >0) {
             foreach ($this->registeredPostUnInstallFunctions as $func) {
-                $this->$func($autoPilot); } }
+                $this->$func(); } }
     }
 
 }
