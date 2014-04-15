@@ -5,11 +5,11 @@ Namespace Model;
 class TestifyLinuxMac extends Base {
 
     // Compatibility
-    public $os = array("Linux") ;
-    public $linuxType = array("Debian") ;
-    public $distros = array("Ubuntu") ;
-    public $versions = array("12.04", "12.10") ;
-    public $architectures = array("32", "64") ;
+    public $os = array("any") ;
+    public $linuxType = array("any") ;
+    public $distros = array("any") ;
+    public $versions = array("any") ;
+    public $architectures = array("any") ;
 
     // Model Group
     public $modelGroup = array("Testifyer") ;
