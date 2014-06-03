@@ -1,4 +1,4 @@
-# Testingkamen, Pharoah Tools
+# Testingkamen, Pharaoh Tools
 
 ## About:
 
@@ -14,7 +14,7 @@ environment stability.
 Testingkamen is modular. object oriented and extendible, you can pretty easily write your own module if you want
 functionality we haven't yet covered. Feel free to submit us pull requests.
 
-This is part of the Pharoah Tools suite, which covers Configuration Management, Test Automation Management, Automated
+This is part of the Pharaoh Tools suite, which covers Configuration Management, Test Automation Management, Automated
 Deployment, Build and Release Management and more, all implemented in code, and all in PHP.
 
 Its easy to write modules for any Operating System but we've begun with Ubuntu and adding more as soon as possible.
@@ -23,7 +23,7 @@ Currently, all of the Modules work on Ubuntu 12, most on 13, and a few on Centos
 
 ## Installation
 
-The preferred way to install any of the Pharoah apps (including this) is through cleopatra. If you install cleopatra
+The preferred way to install any of the Pharaoh apps (including this) is through cleopatra. If you install cleopatra
 on your machine (http://github.com/phpengine/cleopatra), then you can install testingkamen using the following:
 
 sudo cleopatra testingkamen install --yes --guess
@@ -61,7 +61,7 @@ available actions too.
 You'll be able to automate any action from any available module into an autopilot file, or run it from the CLI. I'm
 working on a web front end, but you can also use JSON output and the PostInput module to use any module from an API.
 
-Go to http://www.pharoah-tools.org.uk for more
+Go to http://www.pharaoh-tools.org.uk for more
 
 
 ## Available Commands:
