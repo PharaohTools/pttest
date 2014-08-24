@@ -199,6 +199,11 @@ COMPLETION;
         return false ;
     }
 
+    public function ensureTrailingSlash($str) {
+        if (substr($str, -1, 1) != DIRECTORY_SEPARATOR) { $str .= DIRECTORY_SEPARATOR ; }
+        return $str ;
+    }
+
     protected function extraCommands(){
         self::swapCommandArrayPlaceHolders($this->extraCommandsArray);
         self::executeAsShell($this->extraCommandsArray);
