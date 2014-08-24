@@ -9,20 +9,20 @@ class TestifyInfo extends Base {
     public $name = "Testifyer - Creates default tests for your project";
 
     public function __construct() {
-      parent::__construct();
+        parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "Testify" =>  array_merge(parent::routesAvailable(), array("standard-php", "joomla", "drupal7",
-          "php-js", "html-js") ) );
+        return array( "Testify" =>  array_merge(parent::routesAvailable(), array("standard-php", "joomla", "drupal7",
+            "php-js", "html-js") ) );
     }
 
     public function routeAliases() {
-      return array("testify"=>"Testify");
+        return array("testify"=>"Testify");
     }
 
     public function helpDefinition() {
-      $help = <<<"HELPDATA"
+        $help = <<<"HELPDATA"
   Testify allows you to create and configure default tests for projects.
 
   Testify, testify
