@@ -2,38 +2,31 @@
 
 Namespace Core ;
 
-class AutoPilot {
+use Model\Base;
 
-  // Git, gitk,git-cola and git-core
-  public $GitToolsInstallExecute = false; // true or false
-  public $GitToolsUnInstallExecute = false; // true or false
+class AutoPilot extends Base {
 
-  // Devhelper Install Variables
-  public $DevhelperInstallExecute = false; // true or false
-  public $DevhelperUnInstallExecute = false;
-  public $DevhelperInstallDirectory = '/opt/devhelper';
-  public $DevhelperExecutorDirectory = '/usr/bin';
+    public $params ;
+    protected $appHomeDir ;
+    protected $myUser ;
 
-  // PHP Unit 3.5 (for php 5.3) Install Variables
-  public $PHPUnit35InstallExecute = false; // true or false
-  public $PHPUnit35UnInstallExecute = false;
-  public $PHPUnit35InstallDirectory = '/opt/phpunit';
-  public $PHPUnit35ExecutorDirectory = '/usr/bin';
+    public function __construct($params = array()) {
+        global $argv ;
+        $argv_or_array = (isset($argv)) ? $argv : array() ;
+        $argv_and_params = array_merge($argv_or_array, $params) ;
+        parent::__construct($argv_and_params);
+        $this->setProperties();
+    }
 
-  // PHP Unit 3.5 (for php 5.3) Install Variables
-  public $PHPCSInstallExecute = false; // true or false
-  public $PHPCSUnInstallExecute = false;
-  public $PHPCSInstallDirectory = '/opt/phpcs';
-  public $PHPCSExecutorDirectory = '/usr/bin';
+    protected function setProperties() {
+        $this->appHomeDir = dirname(dirname(dirname(__FILE__))) ;
+        $this->setMyUser();
+    }
 
-  // PHP Unit 3.5 (for php 5.3) Install Variables
-  public $PHPMDInstallExecute = false; // true or false
-  public $PHPMDUnInstallExecute = false;
-  public $PHPMDInstallDirectory = '/opt/phpmd';
-  public $PHPMDExecutorDirectory = '/usr/bin';
-
-  // Selenium Server
-  public $SeleniumServerInstallExecute = false; // true or false
-  public $SeleniumServerUnInstallExecute = false;
+    protected function setMyUser() {
+        $this->myUser = self::executeAndLoad("whoami") ;
+        $this->myUser = str_replace("\n", "", $this->myUser) ;
+        $this->myUser = str_replace("\r", "", $this->myUser) ;
+    }
 
 }
