@@ -30,14 +30,15 @@ class TestifyLinuxMac extends Base {
     }
 
     public function askToScreenWhetherToTestify() {
+        if (isset($this->params["yes"])) { return true ; }
         $question = 'Testify This?';
         return self::askYesOrNo($question, true);
     }
 
     public function setAllTestTypes() {
         $this->testTypes =  array(
-            "standard-php" => array ("behat", "phpunit") ,
-            "joomla" => array ("phpunit", "jasmine") ,
+            "standard-php" => array ("behat", "PHPUnit") ,
+            "joomla" => array ("PHPUnit", "jasmine") ,
             "drupal7" => array ("simpletest", "jasmine") ,
             "php-js" => array ("phpunit", "jasmine") ,
             "html-js" => array ("jasmine")
@@ -51,10 +52,11 @@ class TestifyLinuxMac extends Base {
     }
 
     private function doSingleTestify($testType) {
-        $singleTestModel = "" ;
-        $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $this->content) ;
-        // if we don't have an object, its an array of errors
-        // if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
+        $module = ucfirst($testType) ;
+        $cl = '\Model\\'.$module ;
+        $testFactory = new $cl() ;
+        $test = $testFactory->getModel($this->params) ;
+        $test->askInit();
     }
 
 }
