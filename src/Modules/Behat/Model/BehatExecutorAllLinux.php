@@ -33,7 +33,6 @@ class BehatExecutorAllLinux extends BaseTestExec {
         $outDir = $this->getOutDir() ;
         $outType = $this->getOutType() ;
         $ray = array(
-            "cd ".getcwd(),
             "cd $featureDir",
             "behat --format $outType --out $outDir" );
         return $ray ;
@@ -41,7 +40,7 @@ class BehatExecutorAllLinux extends BaseTestExec {
 
     private function getFeatureDir() {
         if (isset($this->params["test-dir"])) { $fDir = $this->params["test-dir"] ; }
-        else { $fDir = "build/tests/behat" ;   }
+        else { $fDir = getcwd() ;   }
         return $fDir ;
     }
 
