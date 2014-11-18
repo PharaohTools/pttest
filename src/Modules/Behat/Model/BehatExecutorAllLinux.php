@@ -41,7 +41,6 @@ class BehatExecutorAllLinux extends BaseTestExec {
     private function getFeatureDir() {
         if (isset($this->params["test-dir"])) { $fDir = $this->params["test-dir"] ; }
         else { $fDir = getcwd() ;   }
-        echo $fDir ;
         return $fDir ;
     }
 
