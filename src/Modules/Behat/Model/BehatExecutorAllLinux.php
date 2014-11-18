@@ -46,7 +46,7 @@ class BehatExecutorAllLinux extends BaseTestExec {
 
     private function getOutDir() {
         if (isset($this->params["out-dir"])) { $oDir = $this->params["out-dir"] ; }
-        else { $oDir = ",".getcwd()."/build/reports/behat" ;   }
+        else { $oDir = ",".getcwd()."../../../build/reports/behat" ;   }
         return $oDir ;
     }
 
