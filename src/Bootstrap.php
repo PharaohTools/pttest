@@ -11,6 +11,7 @@ $bootStrap->main($bootStrapParams);
 class BootStrap {
 
     public function __construct() {
+        require_once("Constants.php");
         require_once("AutoLoad.php");
         $autoLoader = new autoLoader();
         $autoLoader->launch();
