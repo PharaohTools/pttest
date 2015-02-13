@@ -42,12 +42,12 @@ class PHPUnitInfo extends Base {
 
         - init, initialize
         Initialises the PHPUnit test suite of this project
-        example: testingkamen phpunit init
-        example: testingkamen phpunit initialize
+        example: pttest phpunit init
+        example: pttest phpunit initialize
 
         - execute
         Executes the PHPUnit test suite of this project
-        example: testingkamen phpunit execute
+        example: pttest phpunit execute
 
 HELPDATA;
       return $help ;

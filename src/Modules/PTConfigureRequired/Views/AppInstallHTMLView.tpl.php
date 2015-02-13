@@ -2,14 +2,14 @@
 
 <head>
   <title>
-    GC Testingkamen
+    GC PTConfigure
   </title>
 </head>
 
 <body>
 
   <h3>
-    Single App Uninstaller:<br />
+    Single App Installer:<br />
     --------------------------------------------
   </h3>
 

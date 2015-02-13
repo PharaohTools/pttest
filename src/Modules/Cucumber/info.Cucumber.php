@@ -42,12 +42,12 @@ class CucumberInfo extends Base {
 
         - init, initialize
         Initialises the Cucumber test suite of this project
-        example: testingkamen cucumber init
-        example: testingkamen cucumber initialize
+        example: pttest cucumber init
+        example: pttest cucumber initialize
 
         - execute
         Executes the Cucumber test suite of this project
-        example: testingkamen cucumber execute
+        example: pttest cucumber execute
 
 HELPDATA;
       return $help ;

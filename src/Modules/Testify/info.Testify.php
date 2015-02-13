@@ -30,25 +30,25 @@ class TestifyInfo extends Base {
         - standard-php
         Create a default set of tests in build/tests for a standard PHP project. PHPUnit Tests,
         Jasmine for Javascript, Behat/Mink and Ruby/Cucumber
-        example: cleopatra testify standard-php
+        example: ptconfigure testify standard-php
 
         - joomla
         Create a default set of tests in build/tests for a Joomla PHP project. PHPUnit Tests,
         Jasmine for Javascript, Behat/Mink and Ruby/Cucumber
-        example: cleopatra testify joomla
+        example: ptconfigure testify joomla
 
         - drupal7
         Create a default set of tests in build/tests for a Drupal 7 project. Simpletest,
         Behat/Mink and Ruby/Cucumber
-        example: cleopatra testify drupal7
+        example: ptconfigure testify drupal7
 
         - php-js
         Create a default set of tests in build/tests for a standard PHP/JS project.
-        example: cleopatra testify php-js
+        example: ptconfigure testify php-js
 
         - html-js
         Create a default set of tests in build/tests for a standard HTML/JS project.
-        example: cleopatra testify html-js
+        example: ptconfigure testify html-js
 
 HELPDATA;
       return $help ;

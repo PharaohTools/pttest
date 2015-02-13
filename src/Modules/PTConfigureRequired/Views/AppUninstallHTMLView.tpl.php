@@ -2,22 +2,22 @@
 
 <head>
   <title>
-    GC Testingkamen
+    GC PTConfigure
   </title>
 </head>
 
 <body>
 
   <h3>
-    Single App Installer:<br />
+    Single App Uninstaller:<br />
     --------------------------------------------
   </h3>
 
   <?php echo $pageVars["appName"] ; ?>: <?php
 
-  $result_summary = (strlen($pageVars["appStatusResult"])>0) ? "Installed" : "Not Installed" ;
+  $result_summary = (strlen($pageVars["appInstallResult"])>0) ? "Success" : "Failure" ;
   echo $result_summary."\n\n" ;
-  $lines = explode(PHP_EOL, $pageVars["appStatusResult"]);
+  $lines = explode(PHP_EOL, $pageVars["appInstallResult"]);
   foreach ($lines as $line) {
      echo "<p>$line</p>";
   }

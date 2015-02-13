@@ -32,21 +32,43 @@ class BehatExecutorAllLinux extends BaseTestExec {
         $featureDir = $this->getFeatureDir() ;
         $outDir = $this->getOutDir() ;
         $outType = $this->getOutType() ;
+        $startDir = getcwd();
+
+//        if () {
+//
+//        } else {
+//
+//        }
+
         $ray = array(
             "cd $featureDir",
-            "behat --format $outType --out $outDir" );
+            "behat --format $outType --out $outDir",
+            "cd $startDir" );
         return $ray ;
     }
 
     private function getFeatureDir() {
         if (isset($this->params["test-dir"])) { $fDir = $this->params["test-dir"] ; }
-        else { $fDir = getcwd() ;   }
+        else if (isset($this->params["guess"])) {
+            $fDir = "build".DS."tests".DS."behat" ;
+            if (!is_dir(getcwd().DS.$fDir)) { mkdir(getcwd().DS.$fDir, 0775, true) ; } }
+        else { $fDir = "" ;   }
         return $fDir ;
     }
 
     private function getOutDir() {
-        if (isset($this->params["out-dir"])) { $oDir = ",".$this->params["out-dir"] ; }
-        else { $oDir = ",".getcwd()."../../../build/reports/behat" ;   }
+        if (isset($this->params["out-dir"])) {
+            // if relative use it or use temp
+            if (substr($this->params["out-dir"], 0, 1) !== DS) {
+                $oDir = ",".$this->params["out-dir"] ; }
+            else {
+                $this->useTempDir = $this->params["out-dir"] ;
+                $oDir = ","."temp" ; } }
+        else if (isset($this->params["guess"])) {
+            $dir = "..".DS."..".DS."..".DS."build".DS."reports".DS."behat" ;
+            $this->useTempDir = $dir ;
+            $oDir = ","."temp" ; }
+        else { $oDir = ","."reports" ;   }
         return $oDir ;
     }
 

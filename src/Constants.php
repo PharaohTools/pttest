@@ -4,7 +4,7 @@
  * Pharaoh Tools Constants
  */
 
-define('PHARAOH_APP', "testingkamen") ;
+define('PHARAOH_APP', "pttest") ;
 
 if (in_array(PHP_OS, array("Windows", "WINNT"))) {
     $sd = getenv('SystemDrive') ;
@@ -15,20 +15,20 @@ if (in_array(PHP_OS, array("Windows", "WINNT"))) {
     exec($command, $outputArray);
     define('VBOXMGCOMM', "\"{$outputArray[0]}\" ") ;
     define('PFILESDIR', $sd.'\\PharaohTools\boxes') ;
-    define('CLEOCOMM', "cleopatra.cmd") ;
-    define('DAPPCOMM', "dapperstrano.cmd") ;
-    define('PHLCOMM', "phlagrant.cmd") ;
-    define('TSTCOMM', "testingkamen.cmd") ;
+    define('CLEOCOMM', "ptconfigure.cmd") ;
+    define('DAPPCOMM', "ptdeploy.cmd") ;
+    define('PHLCOMM', "ptvirtualize.cmd") ;
+    define('TSTCOMM', "pttest.cmd") ;
     define('BOXDIR', $sd.'\\PharaohTools\boxes') ;
     define("DS", "\\");
     define("BASE_TEMP_DIR", getenv("SystemDrive").'\Temp\\'); }
 else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
     define('VBOXMGCOMM', "vboxmanage ") ;
     define('PFILESDIR', "/opt/") ;
-    define('CLEOCOMM', "cleopatra ") ;
-    define('DAPPCOMM', "dapperstrano ") ;
-    define('PHLCOMM', "phlagrant") ;
-    define('TSTCOMM', "testingkamen") ;
+    define('CLEOCOMM', "ptconfigure ") ;
+    define('DAPPCOMM', "ptdeploy ") ;
+    define('PHLCOMM', "ptvirtualize") ;
+    define('TSTCOMM', "pttest") ;
     define("DS", "/");
     define("BASE_TEMP_DIR", '/tmp/');
-    define('BOXDIR', DS.'phlagrant/boxes'.'\\') ; }
+    define('BOXDIR', DS.'ptvirtualize/boxes'.'\\') ; }

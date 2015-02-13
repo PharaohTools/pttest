@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class AutopilotInfo extends CleopatraBase {
+class AutopilotInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Cleopatra Autopilot - User Defined Installations";
+    public $name = "PTConfigure Autopilot - User Defined Installations";
 
     public function __construct() {
       parent::__construct();
@@ -23,14 +23,14 @@ class AutopilotInfo extends CleopatraBase {
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This command is part of a default Module and provides you with a method by
-  which you can perform user defined executions of any Cleopatra Modules, in
+  which you can perform user defined executions of any PTConfigure Modules, in
   any order, and with your own predefined settings.
 
   Autopilot, autopilot, auto
 
     - install, execute
     execute all of the defined modules in your Autopilot file
-    example: cleopatra autopilot install --autopilot-file=*path-to-file*
+    example: ptconfigure autopilot install --autopilot-file=*path-to-file*
 
 HELPDATA;
       return $help ;

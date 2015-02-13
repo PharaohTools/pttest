@@ -12,8 +12,8 @@ class Installer {
     private $bootStrapData;
     private $programDataFolder;
     private $programExecutorFolder;
-    private $programNameMachine = "testingkamen";
-    private $programNameFriendly = " Testingkamen! "; // 12 chars
+    private $programNameMachine = "pttest";
+    private $programNameFriendly = " PTTest! "; // 12 chars
 
     public function __construct() {
         $this->populateStartDirectory();

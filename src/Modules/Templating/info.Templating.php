@@ -43,7 +43,7 @@ class TemplatingInfo extends Base {
 
         - install
         Installs a template
-        example: testingkamen template install
+        example: pttest template install
 
 HELPDATA;
       return $help ;

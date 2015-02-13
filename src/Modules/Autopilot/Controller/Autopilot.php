@@ -39,7 +39,7 @@ class Autopilot extends Base {
         $autoPilotFileName = escapeshellcmd($autoPilotFileName);
         $autoPilotFilePath = getcwd().'/'.$autoPilotFileName;
         $defaultFolderToCheck = str_replace("src/Controller",
-          "build/config/cleopatra", dirname(__FILE__));
+          "build/config/ptconfigure", dirname(__FILE__));
         $defaultName = $defaultFolderToCheck.'/'.$autoPilotFileName.".php";
         if (file_exists($autoPilotFileName)) {
             require_once($autoPilotFileName); }

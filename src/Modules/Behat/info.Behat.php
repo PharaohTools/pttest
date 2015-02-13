@@ -32,12 +32,12 @@ class BehatInfo extends Base {
 
         - init, initialize
         Initialises the Behat test suite of this project
-        example: testingkamen behat init
-        example: testingkamen behat initialize
+        example: pttest behat init
+        example: pttest behat initialize
 
         - execute
         Executes the Behat test suite of this project
-        example: testingkamen behat execute
+        example: pttest behat execute
 
 HELPDATA;
       return $help ;
